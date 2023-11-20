@@ -23,6 +23,9 @@ public class Farm {
  * Metodo contrutor.
 */
 
+  public Farm() {
+  }
+
   public Farm(Long id, String name, Double size) {
     this.id = id;
     this.name = name;
