@@ -64,4 +64,15 @@ public class CropController {
     List<CropDto.ToResponse> cropResponse = crops.stream().map(CropDto::fromEntity).toList();
     return ResponseEntity.status(HttpStatus.OK).body(cropResponse);
   }
+
+    /**
+ * Método getAllCrops.
+ */
+  @GetMapping("/crops")
+  public ResponseEntity<?> getAllCrops() {
+    List<Crop> crops = cropService.getAllCrops();
+
+    List<CropDto.ToResponse> cropDto = crops.stream().map(CropDto::fromEntity).toList();
+    return ResponseEntity.status(HttpStatus.OK).body(cropDto);
+  }
 }
