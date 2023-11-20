@@ -5,7 +5,6 @@ import com.betrybe.agrix.models.entities.Crop;
 import com.betrybe.agrix.models.entities.Farm;
 import com.betrybe.agrix.services.CropService;
 import com.betrybe.agrix.services.FarmService;
-
 import java.util.List;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
@@ -51,7 +50,7 @@ public class CropController {
     }).orElse(ResponseEntity.notFound().build());
   }
 
-    /**
+  /**
  * Método getCropFarm.
  */
   @GetMapping("/farms/{farmId}/crops")
@@ -65,9 +64,9 @@ public class CropController {
     return ResponseEntity.status(HttpStatus.OK).body(cropResponse);
   }
 
-    /**
- * Método getAllCrops.
- */
+  /**
+   * Método getAllCrops.
+   */
   @GetMapping("/crops")
   public ResponseEntity<?> getAllCrops() {
     List<Crop> crops = cropService.getAllCrops();
@@ -81,13 +80,13 @@ public class CropController {
    */
   @GetMapping("/crops/{id}")
   public ResponseEntity<?> getCropById(@PathVariable Long id) {
-  Optional<Crop> Crop = cropService.getCropById(id);
-  if (Crop.isEmpty()) {
+    Optional<Crop> cropOptional = cropService.getCropById(id);
+    if (cropOptional.isEmpty()) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Plantação não encontrada!");
-  }
-  return Crop.map(crop -> {
+    }
+    return cropOptional.map(crop -> {
       CropDto.ToResponse response = CropDto.fromEntity(crop);
       return ResponseEntity.status(HttpStatus.OK).body(response);
-  }).orElse(ResponseEntity.notFound().build());
-}
+    }).orElse(ResponseEntity.notFound().build());
+  }
 }
