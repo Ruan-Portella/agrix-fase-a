@@ -75,4 +75,19 @@ public class CropController {
     List<CropDto.ToResponse> cropDto = crops.stream().map(CropDto::fromEntity).toList();
     return ResponseEntity.status(HttpStatus.OK).body(cropDto);
   }
+
+  /**
+   * Método getCropById.
+   */
+  @GetMapping("/crops/{id}")
+  public ResponseEntity<?> getCropById(@PathVariable Long id) {
+  Optional<Crop> Crop = cropService.getCropById(id);
+  if (Crop.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Plantação não encontrada!");
+  }
+  return Crop.map(crop -> {
+      CropDto.ToResponse response = CropDto.fromEntity(crop);
+      return ResponseEntity.status(HttpStatus.OK).body(response);
+  }).orElse(ResponseEntity.notFound().build());
+}
 }

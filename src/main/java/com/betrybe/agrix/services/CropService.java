@@ -4,6 +4,7 @@ import com.betrybe.agrix.models.entities.Crop;
 import com.betrybe.agrix.models.repositories.CropRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,10 @@ public class CropService {
   //Método getAllFarms.
   public List<Crop> getAllCrops() {
     return cropRepository.findAll();
+  }
+
+  //Método getFarmById.
+  public Optional<Crop> getCropById(Long farmId) {
+    return cropRepository.findById(farmId);
   }
 }
