@@ -1,9 +1,12 @@
 package com.betrybe.agrix.models.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -18,6 +21,9 @@ public class Farm {
   private Long id;
   private String name;
   private double size;
+
+  @OneToMany(mappedBy = "farm")
+  private List<Crop> crops;
 
   /**
  * Metodo contrutor.
@@ -54,5 +60,13 @@ public class Farm {
 
   public void setId(long id) {
     this.id = id;
+  }
+
+  public List<Crop> getCrops() {
+    return crops;
+  }
+
+  public void setCrops(List<Crop> crops) {
+    this.crops = crops;
   }
 }
